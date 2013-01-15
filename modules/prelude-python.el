@@ -39,6 +39,10 @@
   "Defaults for Python programming."
   (subword-mode +1)
   (electric-indent-mode -1))
+  (run-hooks 'prelude-prog-mode-hook) ;; run manually; not derived from prog-mode
+  (electric-indent-mode -1)
+  (setq python-indent 2)
+  (define-key python-mode-map (kbd "RET") 'newline-and-indent))
 
 (setq prelude-python-mode-hook 'prelude-python-mode-defaults)
 
