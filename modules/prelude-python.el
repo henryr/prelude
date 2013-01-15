@@ -99,7 +99,11 @@
                 #'python-imenu-create-flat-index))
   (add-hook 'post-self-insert-hook
             #'electric-layout-post-self-insert-function nil 'local)
-  (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local))
+  (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local)
+  (run-hooks 'prelude-prog-mode-hook) ;; run manually; not derived from prog-mode
+  (electric-indent-mode -1)
+  (setq python-indent 2)
+  (define-key python-mode-map (kbd "RET") 'newline-and-indent))
 
 (setq prelude-python-mode-hook 'prelude-python-mode-defaults)
 
