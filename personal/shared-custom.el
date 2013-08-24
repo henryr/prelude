@@ -53,6 +53,10 @@
 (global-set-key (kbd "C-c C-r") 'ff-find-other-file)
 (global-set-key (kbd "M-=") 'er/expand-region)
 
+;; Eval lisp region and buffer
+(define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "C-c C-s") 'eval-region)
+
 ;; git-emacs provided for git-grep
 (require 'git-emacs)
 (define-key git-global-map "M" 'magit-status)
