@@ -12,11 +12,11 @@
 
 ;; Google C style mode
 (require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+;(add-hook 'c-mode-common-hook 'google-set-c-style)
 
 ;; C tweaks for Impala
 (defconst my-cc-style
-  '("gnu" (c-offsets-alist .
+  '("Google" (c-offsets-alist .
                            ((innamespace . [0])
                             (arglist-cont-nonempty . 4)
                             (arglist-intro . 4)
@@ -24,6 +24,8 @@
                             (member-init-intro . 4))
                            )))
 (c-add-style "my-cc-style" my-cc-style)
+(defun set-my-cc-style () (interactive) (google-set-c-style) (c-set-style "my-cc-style"))
+(add-hook 'c-mode-common-hook 'set-my-cc-style)
 
 ;; Set correct indentation for Java
 (add-hook 'java-mode-hook (lambda ()
