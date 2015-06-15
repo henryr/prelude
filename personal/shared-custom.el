@@ -27,6 +27,9 @@
 (defun set-my-cc-style () (interactive) (google-set-c-style) (c-set-style "my-cc-style"))
 (add-hook 'c-mode-common-hook 'set-my-cc-style)
 
+(add-hook 'python-mode-hook '(lambda ()
+ (setq python-indent 2)))
+
 ;; Set correct indentation for Java
 (add-hook 'java-mode-hook (lambda ()
                             (setq c-basic-offset 2)))
