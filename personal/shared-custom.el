@@ -7,6 +7,15 @@
                "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+(require 'magit)
+
+(with-eval-after-load 'info
+  (info-initialize)
+  (add-to-list 'Info-directory-list
+                      "~/.emacs.d/lib/magit/Documentation/"))
+(require 'thrift-mode)
+
 ;; .h files should be treated as C++ files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -24,15 +33,17 @@
                             (member-init-intro . 4))
                            )))
 (c-add-style "my-cc-style" my-cc-style)
-(defun set-my-cc-style () (interactive) (google-set-c-style) (c-set-style "my-cc-style"))
+(defun set-my-cc-style ()
+  (interactive) (google-set-c-style) (c-set-style "my-cc-style"))
 (add-hook 'c-mode-common-hook 'set-my-cc-style)
 
 (add-hook 'python-mode-hook '(lambda ()
  (setq python-indent 2)))
 
 ;; Set correct indentation for Java
-(add-hook 'java-mode-hook (lambda ()
-                            (setq c-basic-offset 2)))
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq c-basic-offset 2)))
 
 ;; Various appearance tweaks
 (setq linum-format " %d ")
@@ -51,10 +62,14 @@
 ;; Re-enable arrow-keys etc
 (setq prelude-guru nil)
 
+;; Helm everywhere
+(require 'prelude-helm-everywhere)
+
 ;; Custom keybindings
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c C-r") 'ff-find-other-file)
 (global-set-key (kbd "M-=") 'er/expand-region)
+(global-set-key (kbd "M-K") 'prelude-kill-whole-line)
 
 ;; Eval lisp region and buffer
 (define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)
